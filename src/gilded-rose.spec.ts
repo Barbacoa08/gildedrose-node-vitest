@@ -207,7 +207,48 @@ describe("Gilded Rose", () => {
 		});
 	});
 
-	// describe("`Conjured` tests", () => {});
-	// conjured items degrade in quality twice as fast as normal items
 	// ASSUMPTIONS: existing special items are not conjurable (Sulfuras, Aged Brie, Backstage passes)
+	describe("`Conjured` tests (degrades twice as quickly)", () => {
+		const conjuredMock: Item = {
+			name: "Conjured stick",
+			sellIn: 30,
+			quality: 50,
+		};
+
+		it("reduces quality by 2 when `sellIn` >= 0", () => {
+			const gildedRose = new GildedRose([
+				new Item(conjuredMock.name, conjuredMock.sellIn, conjuredMock.quality),
+			]);
+			gildedRose.updateQuality();
+
+			expect(gildedRose.items[0].quality).toBe(conjuredMock.quality - 2);
+		});
+
+		it("reduces quality by 4 when `sellIn` >= 0", () => {
+			const gildedRose = new GildedRose([
+				new Item(conjuredMock.name, conjuredMock.sellIn, conjuredMock.quality),
+			]);
+			gildedRose.updateQuality();
+
+			expect(gildedRose.items[0].quality).toBe(conjuredMock.quality - 4);
+		});
+
+		it("reduces quality by 4 when `sellIn` >= 0", () => {
+			const gildedRose = new GildedRose([
+				new Item(conjuredMock.name, conjuredMock.sellIn, conjuredMock.quality),
+			]);
+			gildedRose.updateQuality();
+
+			expect(gildedRose.items[0].quality).toBe(conjuredMock.quality - 4);
+		});
+
+		it("does not reduce quality when it is 0", () => {
+			const gildedRose = new GildedRose([
+				new Item(conjuredMock.name, mock.sellIn, 0),
+			]);
+			gildedRose.updateQuality();
+
+			expect(gildedRose.items[0].quality).toBe(0);
+		});
+	});
 });
