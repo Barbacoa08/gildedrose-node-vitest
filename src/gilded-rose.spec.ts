@@ -217,25 +217,25 @@ describe("Gilded Rose", () => {
 
 		it("reduces quality by 2 when `sellIn` >= 0", () => {
 			const gildedRose = new GildedRose([
-				new Item(conjuredMock.name, conjuredMock.sellIn, conjuredMock.quality),
+				new Item(conjuredMock.name, 10, conjuredMock.quality),
 			]);
 			gildedRose.updateQuality();
 
 			expect(gildedRose.items[0].quality).toBe(conjuredMock.quality - 2);
 		});
 
-		it("reduces quality by 4 when `sellIn` >= 0", () => {
+		it("reduces quality by 4 when `sellIn` === 0", () => {
 			const gildedRose = new GildedRose([
-				new Item(conjuredMock.name, conjuredMock.sellIn, conjuredMock.quality),
+				new Item(conjuredMock.name, 0, conjuredMock.quality),
 			]);
 			gildedRose.updateQuality();
 
 			expect(gildedRose.items[0].quality).toBe(conjuredMock.quality - 4);
 		});
 
-		it("reduces quality by 4 when `sellIn` >= 0", () => {
+		it("reduces quality by 4 when `sellIn` < 0", () => {
 			const gildedRose = new GildedRose([
-				new Item(conjuredMock.name, conjuredMock.sellIn, conjuredMock.quality),
+				new Item(conjuredMock.name, -3, conjuredMock.quality),
 			]);
 			gildedRose.updateQuality();
 
