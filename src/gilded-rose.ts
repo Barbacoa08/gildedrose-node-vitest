@@ -3,6 +3,7 @@ export class Item {
 	sellIn: number;
 	quality: number;
 
+	// @ts-ignore
 	constructor(name, sellIn, quality) {
 		this.name = name;
 		this.sellIn = sellIn;
