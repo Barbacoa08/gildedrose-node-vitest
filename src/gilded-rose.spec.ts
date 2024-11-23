@@ -1,6 +1,7 @@
 import { expect, describe, it } from "vitest";
 
 import { Item, GildedRose } from "./gilded-rose";
+import { ConjuredString } from "./shared";
 
 describe("Gilded Rose", () => {
 	const mock: Item = {
@@ -210,7 +211,7 @@ describe("Gilded Rose", () => {
 	// ASSUMPTIONS: existing special items are not conjurable (Sulfuras, Aged Brie, Backstage passes)
 	describe("`Conjured` tests (degrades twice as quickly)", () => {
 		const conjuredMock: Item = {
-			name: "Conjured stick",
+			name: `${ConjuredString} stick`,
 			sellIn: 30,
 			quality: 50,
 		};
@@ -250,5 +251,7 @@ describe("Gilded Rose", () => {
 
 			expect(gildedRose.items[0].quality).toBe(0);
 		});
+
+		// TODO: ensure we don't go below 0, eg when quality is 1 and sellby is negative
 	});
 });

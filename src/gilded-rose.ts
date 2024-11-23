@@ -1,3 +1,5 @@
+import { ConjuredString } from "./shared";
+
 // IMPORTANT: DO NOT edit `Item` class
 export class Item {
 	name: string;
@@ -35,7 +37,11 @@ export class GildedRose {
 			) {
 				if (this.items[i].quality > 0) {
 					if (this.items[i].name !== "Sulfuras, Hand of Ragnaros") {
-						this.items[i].quality = this.items[i].quality - 1;
+						this.items[i].quality = this.items[i].name.startsWith(
+							ConjuredString,
+						)
+							? this.items[i].quality - 2
+							: this.items[i].quality - 1;
 					}
 				}
 			} else {
@@ -69,10 +75,15 @@ export class GildedRose {
 					) {
 						if (this.items[i].quality > 0) {
 							if (this.items[i].name !== "Sulfuras, Hand of Ragnaros") {
-								this.items[i].quality = this.items[i].quality - 1;
+								this.items[i].quality = this.items[i].name.startsWith(
+									ConjuredString,
+								)
+									? this.items[i].quality - 2
+									: this.items[i].quality - 1;
 							}
 						}
 					} else {
+						// set backtage passes to zero when the concert has passed
 						this.items[i].quality =
 							this.items[i].quality - this.items[i].quality;
 					}
