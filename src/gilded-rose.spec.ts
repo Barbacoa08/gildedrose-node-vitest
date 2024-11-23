@@ -1,7 +1,7 @@
 import { expect, describe, it } from "vitest";
 
 import { Item, GildedRose } from "./gilded-rose";
-import { ConjuredString } from "./shared";
+import { ConjuredName } from "./shared";
 
 describe("Gilded Rose", () => {
 	const mock: Item = {
@@ -77,8 +77,7 @@ describe("Gilded Rose", () => {
 			expect(gildedRose.items[0].quality).toBe(0);
 		});
 
-		// TODO: fix this bug
-		it.skip("reduces `quality` to 49 if it started >50", () => {
+		it("reduces `quality` to 49 if it started >50", () => {
 			const gildedRose = new GildedRose([
 				new Item(mock.name, mock.sellIn, 100),
 			]);
@@ -122,6 +121,15 @@ describe("Gilded Rose", () => {
 			expect(gildedRose.items[0].quality).toBe(backstageMock.quality + 3);
 		});
 
+		it("quality is set to 0 when `sellIn` <= 0", () => {
+			const gildedRose = new GildedRose([
+				new Item(backstageMock.name, 0, backstageMock.quality),
+			]);
+			gildedRose.updateQuality();
+
+			expect(gildedRose.items[0].quality).toBe(0);
+		});
+
 		it("quality is not changed when it is 50", () => {
 			const gildedRose = new GildedRose([new Item(backstageMock.name, 2, 50)]);
 			gildedRose.updateQuality();
@@ -134,15 +142,6 @@ describe("Gilded Rose", () => {
 			gildedRose.updateQuality();
 
 			expect(gildedRose.items[0].quality).toBe(50);
-		});
-
-		it("quality is set to 0 when `sellIn` <= 0", () => {
-			const gildedRose = new GildedRose([
-				new Item(backstageMock.name, 0, backstageMock.quality),
-			]);
-			gildedRose.updateQuality();
-
-			expect(gildedRose.items[0].quality).toBe(0);
 		});
 	});
 
@@ -211,7 +210,7 @@ describe("Gilded Rose", () => {
 	// ASSUMPTIONS: existing special items are not conjurable (Sulfuras, Aged Brie, Backstage passes)
 	describe("`Conjured` tests (degrades twice as quickly)", () => {
 		const conjuredMock: Item = {
-			name: `${ConjuredString} stick`,
+			name: `${ConjuredName} stick`,
 			sellIn: 30,
 			quality: 50,
 		};
