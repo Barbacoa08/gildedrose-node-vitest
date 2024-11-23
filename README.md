@@ -1,1 +1,1 @@
-# gildedrose-node-vitest
+# gildedrose-ts-vitest
