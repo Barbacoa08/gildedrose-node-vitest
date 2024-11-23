@@ -2,11 +2,6 @@ import { expect, describe, it } from "vitest";
 
 import { Item, GildedRose } from "./gilded-rose";
 
-/* TODOs
-	remove all `.skip`
-	remove all "TODO"s
-*/
-
 describe("Gilded Rose", () => {
 	const mock: Item = {
 		name: "mock",
@@ -125,13 +120,37 @@ describe("Gilded Rose", () => {
 			expect(gildedRose.items[0].quality).toBe(backstageMock.quality + 2);
 		});
 
-		it.skip("increase quality by 3 when `sellIn` is <=5", () => {});
+		it("increase quality by 3 when `sellIn` is <=5", () => {
+			const gildedRose = new GildedRose([
+				new Item(backstageMock.name, 5, backstageMock.quality),
+			]);
+			gildedRose.updateQuality();
 
-		it.skip("quality is not changed when it is 50", () => {});
+			expect(gildedRose.items[0].quality).toBe(backstageMock.quality + 3);
+		});
 
-		it.skip("quality is set to 50 when it starts at 49, even when it is the day of the concert", () => {});
+		it("quality is not changed when it is 50", () => {
+			const gildedRose = new GildedRose([new Item(backstageMock.name, 2, 50)]);
+			gildedRose.updateQuality();
 
-		it.skip("quality is set to 0 when `sellIn` < 0", () => {});
+			expect(gildedRose.items[0].quality).toBe(50);
+		});
+
+		it("quality is set to 50 when it starts at 49, even when it is the day of the concert", () => {
+			const gildedRose = new GildedRose([new Item(backstageMock.name, 1, 49)]);
+			gildedRose.updateQuality();
+
+			expect(gildedRose.items[0].quality).toBe(50);
+		});
+
+		it("quality is set to 0 when `sellIn` <= 0", () => {
+			const gildedRose = new GildedRose([
+				new Item(backstageMock.name, 0, backstageMock.quality),
+			]);
+			gildedRose.updateQuality();
+
+			expect(gildedRose.items[0].quality).toBe(0);
+		});
 	});
 
 	describe("`Aged Brie` tests", () => {
