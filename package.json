@@ -1,16 +1,15 @@
 {
-	"name": "gildedrose-node-vitest",
+	"name": "gildedrose-ts-vitest",
 	"version": "1.0.0",
 	"license": "MIT",
 	"scripts": {
-		"dev": "tsx watch src/index.ts",
-		"start": "node build/index.js",
+    "all": "npm install && npm run build && npm test",
 		"build": "tsc",
-		"test": "vitest"
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage"
 	},
 	"devDependencies": {
-		"@types/node": "22.9.3",
-		"tsx": "4.19.2",
 		"typescript": "5.7.2",
 		"vitest": "2.1.5"
 	}
