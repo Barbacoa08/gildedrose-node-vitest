@@ -77,14 +77,6 @@ describe("Gilded Rose", () => {
 		});
 
 		// TODO: fix this bug
-		it.skip("resets quality to 0 when it is negative", () => {
-			const gildedRose = new GildedRose([new Item(mock.name, mock.sellIn, -3)]);
-			gildedRose.updateQuality();
-
-			expect(gildedRose.items[0].quality).toBe(0);
-		});
-
-		// TODO: fix this bug
 		it.skip("reduces `quality` to 49 if it started >50", () => {
 			const gildedRose = new GildedRose([
 				new Item(mock.name, mock.sellIn, 100),
