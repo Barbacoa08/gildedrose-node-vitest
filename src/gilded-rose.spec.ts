@@ -252,6 +252,18 @@ describe("Gilded Rose", () => {
 			expect(gildedRose.items[0].quality).toBe(0);
 		});
 
-		// TODO: ensure we don't go below 0, eg when quality is 1 and sellby is negative
+		it("sets quality to 0 when `sellIn` is > 0 and `quality` is 1", () => {
+			const gildedRose = new GildedRose([new Item(conjuredMock.name, 10, 1)]);
+			gildedRose.updateQuality();
+
+			expect(gildedRose.items[0].quality).toBe(0);
+		});
+
+		it("sets quality to 0 when `sellIn` is < 0 and `quality` is 1", () => {
+			const gildedRose = new GildedRose([new Item(conjuredMock.name, -4, 1)]);
+			gildedRose.updateQuality();
+
+			expect(gildedRose.items[0].quality).toBe(0);
+		});
 	});
 });

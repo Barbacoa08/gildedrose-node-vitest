@@ -1,4 +1,4 @@
-import { ConjuredString } from "./shared";
+import { ConjuredString, ReduceItemQuality } from "./shared";
 
 // IMPORTANT: DO NOT edit `Item` class
 export class Item {
@@ -37,11 +37,10 @@ export class GildedRose {
 			) {
 				if (this.items[i].quality > 0) {
 					if (this.items[i].name !== "Sulfuras, Hand of Ragnaros") {
-						this.items[i].quality = this.items[i].name.startsWith(
-							ConjuredString,
-						)
-							? this.items[i].quality - 2
-							: this.items[i].quality - 1;
+						this.items[i].quality = ReduceItemQuality(
+							this.items[i].name,
+							this.items[i].quality,
+						);
 					}
 				}
 			} else {
@@ -75,11 +74,10 @@ export class GildedRose {
 					) {
 						if (this.items[i].quality > 0) {
 							if (this.items[i].name !== "Sulfuras, Hand of Ragnaros") {
-								this.items[i].quality = this.items[i].name.startsWith(
-									ConjuredString,
-								)
-									? this.items[i].quality - 2
-									: this.items[i].quality - 1;
+								this.items[i].quality = ReduceItemQuality(
+									this.items[i].name,
+									this.items[i].quality,
+								);
 							}
 						}
 					} else {
